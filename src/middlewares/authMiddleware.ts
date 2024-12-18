@@ -20,12 +20,12 @@ export const authorizeUser = (
     );
   }
 
-  const [Bearer, token] = req.headers.authorization.split(" ");
+  const [_, token] = req.headers.authorization.split(" ");
 
   jwt.verify(token, process.env.JWT_SECRET as string, async (err, decoded) => {
     if (err) {
       return next(
-        new AppError("Forbidden, Invalid token !", HttpStatusCodes.FORBIDDEN)
+        new AppError("Forbidden, Invalid token!", HttpStatusCodes.FORBIDDEN)
       );
     }
 
@@ -79,7 +79,7 @@ export const authorizeAdmin = (
     );
   }
 
-  const [Bearer, token] = req.headers.authorization.split(" ");
+  const [_, token] = req.headers.authorization.split(" ");
 
   jwt.verify(token, process.env.JWT_SECRET as string, async (err, decoded) => {
     if (err)
